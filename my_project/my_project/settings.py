@@ -63,7 +63,7 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
-    'news',
+    'newapp',
     'rest_framework',
     'corsheaders',
 ]
