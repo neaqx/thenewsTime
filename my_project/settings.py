@@ -31,17 +31,14 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = "django-insecure-iy9(r@tmnr25$fzk+ztftj(sxph+h7j4yu1=1r9hxa6^_5i5%g"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ["thenewstime-624024b85ab0.herokuapp.com/"]
+ALLOWED_HOSTS = ["127.0.0.1:8000","thenewstime-624024b85ab0.herokuapp.com/"]
 
 
 REST_FRAMEWORK = {
-    "DEFAULT_AUTHENTICATION_CLASSES": (
-        "rest_framework_simplejwt.authentication.JWTAuthentication",
-    ),
-    "DEFAULT_PERMISSION_CLASSES": [
-        "rest_framework.permissions.IsAuthenticated",
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
     ],
 }
 
@@ -55,19 +52,20 @@ SIMPLE_JWT = {
 # Application definition
 
 INSTALLED_APPS = [
-    "django.contrib.admin",
-    "django.contrib.auth",
-    "django.contrib.contenttypes",
-    "django.contrib.sessions",
-    "django.contrib.messages",
-    "django.contrib.staticfiles",
+   'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
     'django.contrib.sites',
-    'corsheaders',
-    "newsapp",
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
     'rest_framework',
+    'newsapp',
+    'corsheaders',
+    
     
 ]
 
