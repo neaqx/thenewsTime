@@ -8,9 +8,8 @@ https://docs.djangoproject.com/en/5.0/howto/deployment/wsgi/
 """
 
 import os
-
 from django.core.wsgi import get_wsgi_application
 
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "imperialtheatre.settings.settings_file")
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'my_project.settings')
 
 application = get_wsgi_application()
