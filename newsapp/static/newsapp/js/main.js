@@ -1,5 +1,5 @@
-console.log("hello World")
-var url = 'https://newsapi.org/v2/everything?' +
+
+var url = 'https://newsapi.org/v2/top-headlines?country=us&apiKey=63ae134ce98b4f88bf9bc68906a86db9?' +
     'q=Apple&' +
     'from=2024-05-28&' +
     'sortBy=popularity&' +
@@ -11,4 +11,6 @@ fetch(req)
     .then(function (response) {
         console.log(response.json());
     })
+
+
 
