@@ -3,27 +3,28 @@
 {% block title %}Home{% endblock %}
 
 {% block content %}
-<div class="container-fluid">
-    <div class="row">
+    <div class="container-fluid">
+        <div class="row">
 
-        <!-------------------------------- Newewst Topic -->
-        <div class="col-md-8">
-            <div id="news-container" class="row">
-                <!-- Nachrichtenartikel werden hier dynamisch eingefügt -->
+            <!-------------------------------- Main Content Area -->
+            <div class="col-md-8">
+                <div id="news-container" class="row">
+                    <!-- Nachrichtenartikel werden hier dynamisch eingefügt -->
+                </div>
             </div>
-        </div>
 
-        <!-------------------------------- Hot Topics / Related Topics -->
-        <div class="col-md-4">
-            <div class="card mb-4">
-                <div class="card-body">
-                    <ul id="related-topics" class="list-unstyled">
-                        <!-- Verwandte Themen werden hier dynamisch eingefügt -->
-                    </ul>
+            <!-------------------------------- Sidebar -->
+            <div class="col-md-4">
+                <div class="card-body" id="sidebar-container">
+                    <!-- Nachrichtenartikel werden hier dynamisch eingefügt -->
                 </div>
             </div>
         </div>
     </div>
-</div>
 {% endblock %}
+
+
+
+
+
 
