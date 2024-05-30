@@ -41,7 +41,7 @@ function displayArticles(articles, containerId, includeImage) {
     document.querySelectorAll('.read-more').forEach(button => {
         button.addEventListener('click', function() {
             const url = this.getAttribute('data-url');
-            window.location.href = `/article/?url=${encodeURIComponent(url)}`;
+            window.location.href = `/article.html/?url=${encodeURIComponent(url)}`;
         });
     });
 }

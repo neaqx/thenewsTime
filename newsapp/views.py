@@ -5,7 +5,7 @@ from rest_framework.permissions import IsAuthenticated, AllowAny # type: ignore
 from django.http import HttpResponse
 from django.http import JsonResponse
 from django.conf import settings
-import requests # type: ignore
+import requests
 
 
 
@@ -15,6 +15,8 @@ def home(request):
 
 def article_view(request):
     url = request.GET.get('url')
-    response = requests.get(url)
-    article_content = response.text
-    return render(request, 'article.html', {'article_content': article_content})
+    if url:
+        response = requests.get(url)
+        article_content = response.text
+        return render(request, 'article.html', {'article_content': article_content})
+    return render(request, 'article.html', {'article_content': 'Article URL not provided'})
