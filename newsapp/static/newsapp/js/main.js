@@ -1,57 +1,58 @@
-const API_KEY = '2e91014d6bmsh3c14ca4f9dad087p18fc95jsn39fa2bfd2e46';
-const API_URL = 'https://yahoo-finance127.p.rapidapi.com/key-statistics/aapl';
-const API_HOST = 'yahoo-finance127.p.rapidapi.com';
-let newsContainer = document.getElementById('news-container');
-let sidebar = document.getElementById('sidebar-container');
+const apiKey = 'GWQVWVnd3DGeNvJka7YNc0mgnwIMqtfh'; // Replace with your actual API key
 
-let cnt = 0;
-const mxm = 10;
-
-const fetchNews = async () => {
-    if (cnt >= mxm) return;
-
+// Function to make API call to Article Search endpoint
+async function fetchArticles(query, filter = '', page = 0, containerId, includeImage = true) {
+    const url = `https://api.nytimes.com/svc/search/v2/articlesearch.json?q=${query}&fq=${filter}&page=${page}&api-key=${apiKey}`;
     try {
-        let response = await fetch(API_URL, {
-            method: 'GET',
-            headers: {
-                'x-rapidapi-key': API_KEY,
-                'x-rapidapi-host': API_HOST
-            }
-        });
+        const response = await fetch(url);
+        const data = await response.json();
+        displayArticles(data.response.docs, containerId, includeImage);
+    } catch (error) {
+        console.error('Error fetching articles:', error);
+    }
+}
 
-        console.log('Response Status:', response.status);
-        console.log('Response Headers:', response.headers);
+// Function to display articles in the DOM
+function displayArticles(articles, containerId, includeImage) {
+    const container = document.getElementById(containerId);
+    container.innerHTML = ''; // Clear previous results
 
-        if (!response.ok) {
-            throw new Error('Failed to fetch news: ' + response.status + ' ' + response.statusText);
-        }
+    articles.forEach(article => {
+        const articleElement = document.createElement('div');
+        articleElement.classList.add('col-md-12', 'mb-4');
 
-        let data = await response.json();
-        console.log('Data received:', data);
-
-        // Extract relevant properties from the data
-        let shortName = data.shortName;
-        let marketCap = data.marketCap.raw || data.marketCap; // Handle different possible structures
-        let trailingPE = data.trailingPE || 'N/A';
-        let forwardPE = data.forwardPE || 'N/A';
-
-        // Render news to the container
-        newsContainer.innerHTML += `
-            <div>
-                <h3>Company: ${shortName}</h3>
-                <p>Market Cap: ${marketCap}</p>
-                <p>Trailing PE: ${trailingPE}</p>
-                <p>Forward PE: ${forwardPE}</p>
+        const card = `
+            <div class="card">
+                <div class="card-body d-flex align-items-start">
+                    <div class="flex-grow-1">
+                        <h3 class="card-title">${article.headline.main}</h3>
+                        <h5 class="card-text">${article.snippet}</h5>
+                        <button class="btn btn-primary read-more" data-url="${article.web_url}">Read more</button>
+                    </div>
+                    ${includeImage && article.multimedia.length > 0 ? `<img src="https://www.nytimes.com/${article.multimedia[0].url}" class="ml-3" alt="Image" style="width: 150px;">` : ''}
+                </div>
             </div>
         `;
+        articleElement.innerHTML = card;
+        container.appendChild(articleElement);
+    });
 
-        cnt++;
-    } catch (error) {
-        console.warn('Error:', error.message);
-    }
-};
+    // Add event listeners to "Read more" buttons
+    document.querySelectorAll('.read-more').forEach(button => {
+        button.addEventListener('click', function() {
+            const url = this.getAttribute('data-url');
+            window.location.href = `/article/?url=${encodeURIComponent(url)}`;
+        });
+    });
+}
 
-// Call fetchNews function (for example on page load or button click)
-fetchNews();
+// Example function calls
+fetchArticles('technology', '', 0, 'news-container', true); // Fetch articles with the keyword 'technology', with images
+fetchArticles('politics', '', 0, 'sidebar-container', false); // Fetch articles with the keyword 'politics', without images
 
+// Additional function calls for new sections
+fetchArticles('business', '', 0, 'additional-news-container-1', true); // Fetch articles with the keyword 'business', with images
+fetchArticles('media', '', 0, 'additional-news-container-2', true); // Fetch articles with the keyword 'media', with images
 
+// New function call for sidebar media articles
+fetchArticles('media', '', 0, 'sidebar-container-1', false); // Fetch articles with the keyword 'media', without images

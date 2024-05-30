@@ -3,24 +3,43 @@
 {% block title %}Home{% endblock %}
 
 {% block content %}
-    <div class="container-fluid">
+ <div class="container-fluid">
         <div class="row">
-
             <!-------------------------------- Main Content Area -->
             <div class="col-md-8">
+                <h3>Technology</h3>
                 <div id="news-container" class="row">
-                    <!-- Nachrichtenartikel werden hier dynamisch eingefügt -->
+                    <!-- Articles will be dynamically inserted here -->
+                </div>
+                <div id="additional-news-container-1" class="row mt-4">
+                    <!-- Additional articles will be dynamically inserted here -->
+                </div>
+                <div id="additional-news-container-2" class="row mt-4">
+                    <!-- Additional articles will be dynamically inserted here -->
                 </div>
             </div>
 
             <!-------------------------------- Sidebar -->
             <div class="col-md-4">
-                <div class="card-body" id="sidebar-container">
-                    <!-- Nachrichtenartikel werden hier dynamisch eingefügt -->
+                <div class="card">
+                    <h3>Politcs</h3>
+                    <div class="card-body" id="sidebar-container">
+                        <!-- Sidebar articles will be dynamically inserted here -->
+                    </div>
                 </div>
+                 <div class="col-md-12 mt-4">
+                <div class="card">
+                <h3>Media</h3>
+                    <div class="card-body" id="sidebar-container-1">
+                        <!-- Sidebar articles will be dynamically inserted here -->
+                    </div>
+                </div>
+            </div>
+
             </div>
         </div>
     </div>
+   
 {% endblock %}
 
 
