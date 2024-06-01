@@ -1,4 +1,4 @@
-const apiKey = 'GWQVWVnd3DGeNvJka7YNc0mgnwIMqtfh';
+const apiKey = 'GWQVWVnd3DGeNvJka7YNc0mgnwIMqtfh'; 
 
 // Function to make API call to Article Search endpoint
 async function fetchArticles(query, filter = '', page = 0, containerId, includeImage = true) {
@@ -37,22 +37,14 @@ function displayArticles(articles, containerId, includeImage) {
         container.appendChild(articleElement);
     });
 
-    // Add event listeners to "Read more" buttons
+    // Add event listener for "Read more" buttons
     document.querySelectorAll('.read-more').forEach(button => {
         button.addEventListener('click', function() {
             const url = this.getAttribute('data-url');
-            window.location.href = `/article/?url=${encodeURIComponent(url)}`;
+            localStorage.setItem('articleUrl', url);
+            window.location.href = '/article/';
         });
     });
 }
 
-// Example function calls to fetch articles
-fetchArticles('technology', '', 0, 'news-container', true); // Fetch articles with the keyword 'technology', with images
-fetchArticles('politics', '', 0, 'sidebar-container', false); // Fetch articles with the keyword 'politics', without images
-
-// Additional function calls for new sections
-fetchArticles('technology', '', 0, 'additional-news-container-1', true); // Fetch articles with the keyword 'business', with images
-fetchArticles('technology', '', 0, 'additional-news-container-2', true); // Fetch articles with the keyword 'media', with images
-
-// New function call for sidebar media articles
-fetchArticles('business', '', 0, 'sidebar-container-1', false); // Fetch articles with the keyword 'media', without images
+fetchArticles('technology', '', 0, 'container-article', true); // Fetch articles with the keyword 'technology', with images

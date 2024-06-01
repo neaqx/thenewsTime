@@ -14,9 +14,13 @@ def home(request):
     return render(request, 'newsapp/home.html')
 
 def article_view(request):
-    url = request.GET.get('url')
-    if url:
-        response = requests.get(url)
+    article_url = request.GET.get('url')
+    if article_url:
+        response = requests.get(article_url)
         article_content = response.text
-        return render(request, 'article.html', {'article_content': article_content})
-    return render(request, 'article.html', {'article_content': 'Article URL not provided'})
+    else:
+        article_content = "No article URL provided."
+
+    return render(request, 'newsapp/article.html', {'article_content': article_content})
+
+
