@@ -19,10 +19,12 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
-from newsapp.views import home, article_view
+from newsapp.views import home, fetch_full_article, article_details
 
 urlpatterns = [
-    path('article/', article_view, name='article_view'),
+    path('article/', article_details, name='article_detail'),
+    path('fetch_full_article/', fetch_full_article, name='fetch_full_article'),
+
     path('', home, name='home'),
     path('admin/', admin.site.urls),
     path('accounts/', include('django.contrib.auth.urls')),
