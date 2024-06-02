@@ -1,0 +1,14 @@
+{% extends 'newsapp/base.html' %}
+
+{% block title %}Register{% endblock %}
+
+{% block content %}
+
+<h1>Your Bookmarks</h1>
+<ul>
+    {% for bookmark in bookmarks %}
+        <li><a href="{{ bookmark.article.url }}">{{ bookmark.article.title }}</a></li>
+    {% endfor %}
+</ul>
+
+{% endblock %}

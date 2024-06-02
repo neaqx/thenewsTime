@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect,get_object_or_404
 from django.contrib.auth.models import User
 from rest_framework import generics # type: ignore
 from rest_framework.permissions import IsAuthenticated, AllowAny # type: ignore
@@ -8,8 +8,10 @@ from django.conf import settings
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 # 
 from .forms import CreateUserForm
+from .models import Bookmark, Article
 
 
 #Admin Panel
@@ -25,6 +27,8 @@ from .forms import CreateUserForm
 
 # Creating Login and Register views
 def register(request):
+    if request.user.is_authenticated:
+        return redirect('home')
     form =  CreateUserForm()
 
 
@@ -55,7 +59,9 @@ def loginPage(request):
     context = {}
     return render(request, 'newsapp/login.html', context)
 
-
+def logoutUser(request):
+    logout(request)
+    return redirect('login')
 
 
 
@@ -73,7 +79,8 @@ def business(request):
 def technology(request):
     return render(request, 'newsapp/technology.html')
 
-
+def login(request):
+    return render(request, 'newsapp/login.html')
 
 
 
@@ -108,3 +115,14 @@ def fetch_full_article(request):
     return JsonResponse(article, safe=False)
 
 
+# Bookmark 
+@login_required
+def add_bookmark(request, article_id):
+    article = get_object_or_404(Article, id=article_id)
+    Bookmark.objects.get_or_create(user=request.user, article=article)
+    return redirect('newsapp:bookmark_list')
+
+@login_required
+def bookmark_list(request):
+    bookmarks = Bookmark.objects.filter(user=request.user)
+    return render(request, 'newsapp/bookmark_list.html', {'bookmarks': bookmarks})

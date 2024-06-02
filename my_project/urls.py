@@ -19,7 +19,8 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
-from newsapp.views import home, fetch_full_article, article_details, politics, business, technology, register, login
+from newsapp import views 
+from newsapp.views import home, fetch_full_article, article_details, politics, business, technology, register, login, bookmark_list
 
 urlpatterns = [
     path('article/', article_details, name='article_detail'),
@@ -28,6 +29,7 @@ urlpatterns = [
     path('business/', business, name='business'),
     path('technology/', technology, name='technology'),
     path('register/', register, name='register'),
+    path('bookmark_list/',views.bookmark_list, name='bookmark_list'),
     path('login/', login, name='login'),
     path('', home, name='home'),
     path('admin/', admin.site.urls),

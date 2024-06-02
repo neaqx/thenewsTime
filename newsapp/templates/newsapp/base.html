@@ -22,7 +22,7 @@
             <div class="collapse navbar-collapse" id="navbarNavDropdown">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Home</a>
+                        <a class="nav-link active" aria-current="page" href="{% url 'home' %}">Home</a>
                     </li>
                     <li class="nav-item politics-button">
                         <a class="nav-link" href="{% url 'politics' %}">Politics</a>
@@ -35,9 +35,18 @@
                     </li>
                 </ul>
                 <div class="d-flex">
-                    <button class="btn btn-primary me-2">Log-In</button>
-                    <button class="btn btn-secondary">Sign-Up</button>
-                </div>
+             {% if user.is_authenticated %}
+        <span id="hello-msg">Hello, {{ user.username }} </span>
+        <span><a href="{% url 'logout' %}">Logout</a></span>
+    {% else %}
+        <button class="btn btn-primary me-2">
+            <a href="{% url 'login' %}" style="color: white; text-decoration: none;">Log In</a>
+        </button>
+        <button class="btn btn-secondary">
+            <a href="{% url 'register' %}" style="color: white; text-decoration: none;">Sign Up</a>
+        </button>
+    {% endif %}
+</div>
             </div>
         </div>
     </nav>
