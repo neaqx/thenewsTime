@@ -19,12 +19,16 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
-from newsapp.views import home, fetch_full_article, article_details
+from newsapp.views import home, fetch_full_article, article_details, politics, business, technology, register, login
 
 urlpatterns = [
     path('article/', article_details, name='article_detail'),
     path('fetch_full_article/', fetch_full_article, name='fetch_full_article'),
-
+    path('politics/', politics, name='politics'),
+    path('business/', business, name='business'),
+    path('technology/', technology, name='technology'),
+    path('register/', register, name='register'),
+    path('login/', login, name='login'),
     path('', home, name='home'),
     path('admin/', admin.site.urls),
     path('accounts/', include('django.contrib.auth.urls')),

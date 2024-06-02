@@ -1,14 +1,33 @@
 const apiKey = 'GWQVWVnd3DGeNvJka7YNc0mgnwIMqtfh';
+let requestQueue = [];
 
-// Function to make API call to Article Search endpoint
+// Function to make API call to Article Search endpoint with rate limiting
 async function fetchArticles(query, filter = '', page = 0, containerId, includeImage = true) {
     const url = `https://api.nytimes.com/svc/search/v2/articlesearch.json?q=${query}&fq=${filter}&page=${page}&api-key=${apiKey}`;
+    requestQueue.push({ url, containerId, includeImage });
+
+    if (requestQueue.length === 1) {
+        processQueue();
+    }
+}
+
+// Function to process the request queue with a delay to prevent too many requests
+async function processQueue() {
+    if (requestQueue.length === 0) return;
+
+    const { url, containerId, includeImage } = requestQueue[0];
+
     try {
         const response = await fetch(url);
         const data = await response.json();
         displayArticles(data.response.docs, containerId, includeImage);
     } catch (error) {
         console.error('Error fetching articles:', error);
+    } finally {
+        requestQueue.shift();
+        if (requestQueue.length > 0) {
+            setTimeout(processQueue, 2000); // 2-second delay between requests
+        }
     }
 }
 
@@ -46,13 +65,15 @@ function displayArticles(articles, containerId, includeImage) {
     });
 }
 
-// Example function calls to fetch articles
-fetchArticles('technology', '', 0, 'news-container', true); // Fetch articles with the keyword 'technology', with images
-fetchArticles('politics', '', 0, 'sidebar-container', false); // Fetch articles with the keyword 'politics', without images
+// Fetch articles based on the current page
+const currentPath = window.location.pathname;
 
-// Additional function calls for new sections
-fetchArticles('technology', '', 0, 'additional-news-container-1', true); // Fetch articles with the keyword 'business', with images
-fetchArticles('technology', '', 0, 'additional-news-container-2', true); // Fetch articles with the keyword 'media', with images
-
-// New function call for sidebar media articles
-fetchArticles('business', '', 0, 'sidebar-container-1', false); // Fetch articles with the keyword 'media', without images
+if (currentPath.includes('politics')) {
+    fetchArticles('politics', '', 0, 'news-container', true);
+} else if (currentPath.includes('business')) {
+    fetchArticles('business', '', 0, 'news-container', true);
+} else if (currentPath.includes('technology')) {
+    fetchArticles('technology', '', 0, 'news-container', true);
+} else {
+    fetchArticles('home', '', 0, 'news-container', true);
+}

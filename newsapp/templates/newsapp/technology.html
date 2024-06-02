@@ -1,22 +1,4 @@
 {% extends 'newsapp/base.html' %}
-
-{% block title %}Home{% endblock %}
-
 {% block content %}
- <div class="container-fluid">
-        <div class="row">
-            <!-------------------------------- Main Content Area -->
-            <div class="col-md-8">
-                <h3>Technology</h3>
-                <div id="news-container" class="row">
-                    <!-- Articles will be dynamically inserted here -->
-                </div>
-                <div id="additional-news-container-1" class="row mt-4">
-                    <!-- Additional articles will be dynamically inserted here -->
-                </div>
-                <div id="additional-news-container-2" class="row mt-4">
-                    <!-- Additional articles will be dynamically inserted here -->
-                </div>
-            </div>
-
+<div id="news-container" class="row"></div>
 {% endblock %}

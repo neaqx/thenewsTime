@@ -25,13 +25,13 @@
                         <a class="nav-link active" aria-current="page" href="#">Home</a>
                     </li>
                     <li class="nav-item politics-button">
-                        <a class="nav-link" href="#">Politics</a>
+                        <a class="nav-link" href="{% url 'politics' %}">Politics</a>
                     </li>
                     <li class="nav-item business-button">
-                        <a class="nav-link" href="newsapp/templates/newsapp/business.html">Business</a>
+                        <a class="nav-link" href="{% url 'business' %}">Business</a>
                     </li>
                     <li class="nav-item technology-button">
-                        <a class="nav-link" href="newsapp/templates/newsapp/technology.html">Technology</a>
+                        <a class="nav-link" href="{% url 'technology' %}">Technology</a>
                     </li>
                 </ul>
                 <div class="d-flex">
