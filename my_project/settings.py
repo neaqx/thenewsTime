@@ -65,6 +65,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'newsapp',
     'corsheaders',
+    'crispy_forms',
+    'crispy_bootstrap5',
     
     
 ]
@@ -81,6 +83,8 @@ ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_AUTHENTICATION_METHOD = 'username'
 LOGIN_REDIRECT_URL = '/'
 
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+CRISPY_TEMPLATE_PACK = "bootstrap5"
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",

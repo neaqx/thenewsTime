@@ -12,6 +12,7 @@ from django.contrib.auth.decorators import login_required
 # 
 from .forms import CreateUserForm
 from .models import Bookmark, Article
+# from .forms import CommentForm
 
 
 #Admin Panel
@@ -126,3 +127,7 @@ def add_bookmark(request, article_id):
 def bookmark_list(request):
     bookmarks = Bookmark.objects.filter(user=request.user)
     return render(request, 'newsapp/bookmark_list.html', {'bookmarks': bookmarks})
+
+
+#Comment Features
+

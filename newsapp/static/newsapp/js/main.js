@@ -47,7 +47,7 @@ function displayArticles(articles, containerId, includeImage) {
                         <h3 class="card-title">${article.headline.main}</h3>
                         <h5 class="card-text">${article.snippet}</h5>
                         <button class="btn btn-primary read-more" data-url="${article.web_url}">Read more</button>
-                        <button class="btn btn-secondary bookmark" data-article-id="${article._id}"><i class="fas fa-bookmark">B</i> Bookmark</button>
+                        <button class="btn btn-secondary bookmark" data-article-id="${article._id}"><i class="fas fa-bookmark"></i> Bookmark</button>
                     </div>
                     ${includeImage && article.multimedia.length > 0 ? `<img src="https://www.nytimes.com/${article.multimedia[0].url}" class="ml-3" alt="Image" style="width: 150px;">` : ''}
                 </div>
