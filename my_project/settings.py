@@ -67,6 +67,8 @@ INSTALLED_APPS = [
     'corsheaders',
     'crispy_forms',
     'crispy_bootstrap5',
+    # 'compressor',
+    # 'bootstrap5',
     
     
 ]
@@ -192,6 +194,19 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'newsapp', 'static'),
 ]
+
+# STATICFILES_FINDER = [
+#     'django.contrib.staticfiles.finders.FileSystemFinder',
+#     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+#     'compressor.finders.CompressorFinder'
+# ]
+
+# COMPRESS_PRECOMPILERS = (
+#     ('text/x-scss', 'django_libsass.SassCompiler'),
+# )
+
+# COMPRESS_ENABLED = True
+
 django_heroku.settings(locals())
 
 # Default primary key field type
