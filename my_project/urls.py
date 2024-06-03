@@ -25,6 +25,7 @@ from newsapp.views import home, fetch_full_article, article_details, politics, b
 
 urlpatterns = [
     path('login/', auth_views.LoginView.as_view(template_name='login.html'), name='login'),
+    path('add-bookmark/', views.add_bookmark, name='add_bookmark'),
     path('article/', article_details, name='article_detail'),
     path('fetch_full_article/', fetch_full_article, name='fetch_full_article'),
     path('politics/', politics, name='politics'),
@@ -38,3 +39,4 @@ urlpatterns = [
     path('accounts/', include('django.contrib.auth.urls')),
       
 ]
+

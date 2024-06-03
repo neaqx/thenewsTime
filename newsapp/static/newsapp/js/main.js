@@ -73,6 +73,7 @@ function displayArticles(articles, containerId, includeImage) {
                 addBookmark(articleId);
             } else {
                 alert('You need to be logged in to bookmark articles.');
+                window.location.href = '/login/';
             }
         });
     });
@@ -117,13 +118,11 @@ function getCsrfToken() {
     return cookieValue;
 }
 
-
-
 // Fetch articles based on the current page
 const currentPath = window.location.pathname;
 
 if (currentPath.includes('politics')) {
-    fetchArticles('politics', '', 0, 'news-container'&&'sidebar-container', true);
+    fetchArticles('politics', '', 0, 'news-container' && 'sidebar-container', true);
 } else if (currentPath.includes('business')) {
     fetchArticles('business', '', 0, 'news-container', true);
 } else if (currentPath.includes('technology')) {
@@ -132,9 +131,9 @@ if (currentPath.includes('politics')) {
     fetchArticles('home', '', 0, 'news-container', true);
 }
 
-
 fetchArticles('technology', '', 1, 'news-container', true); // Main content: Technology
 fetchArticles('politics', '', 1, 'sidebar-container', false); // Sidebar: Politics
 fetchArticles('business', '', 1, 'sidebar-container-1', false); // Sidebar: Business
 fetchArticles('technology', '', 1, 'additional-news-container-1', true); // Additional content: Technology
 fetchArticles('technology', '', 1, 'additional-news-container-2', true); // Additional content: Technology
+fetchArticles('technology', '', 1, 'additional-news-container-3', true); // Additional content: Technology
