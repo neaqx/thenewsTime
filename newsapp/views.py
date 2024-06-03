@@ -58,7 +58,7 @@ def loginPage(request):
 
 
     context = {}
-    return render(request, 'newsapp/login.html', context)
+    return render(request, 'login.html', context)
 
 def logoutUser(request):
     logout(request)
@@ -82,7 +82,6 @@ def technology(request):
 
 def login(request):
     return render(request, 'newsapp/login.html')
-
 
 
 
@@ -121,7 +120,7 @@ def fetch_full_article(request):
 def add_bookmark(request, article_id):
     article = get_object_or_404(Article, id=article_id)
     Bookmark.objects.get_or_create(user=request.user, article=article)
-    return redirect('newsapp:bookmark_list')
+    return redirect('bookmark_list')
 
 @login_required
 def bookmark_list(request):
