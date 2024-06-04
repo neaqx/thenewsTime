@@ -24,5 +24,5 @@ We are committed to enhancing our platform and continuously improving user exper
 
 Join TheNewsTime community today and stay ahead with the freshest news in Technology, Business, and Politics.
 
-View live website here: [thenewsTime]().
+View live website here: [thenewsTime](https://thenewstime-624024b85ab0.herokuapp.com/).
 
